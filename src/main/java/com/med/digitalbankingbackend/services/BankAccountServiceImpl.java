@@ -111,4 +111,8 @@ public class BankAccountServiceImpl implements BankAccountService{
         debit(accountIdSource,amount,"Transfer to "+accountIdDestination);
         credit(accountIdDestination,amount,"Transfer from "+accountIdSource);
     }
+    @Override
+    public List<BankAccount> bankAccountList(){
+        return bankAccountRepository.findAll();
+    }
 }
