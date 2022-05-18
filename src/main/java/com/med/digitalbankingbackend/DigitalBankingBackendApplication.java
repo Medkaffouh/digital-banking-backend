@@ -1,5 +1,6 @@
 package com.med.digitalbankingbackend;
 
+import com.med.digitalbankingbackend.dtos.CustomerDTO;
 import com.med.digitalbankingbackend.entities.*;
 import com.med.digitalbankingbackend.enums.AccountStatus;
 import com.med.digitalbankingbackend.enums.OperationType;
@@ -30,7 +31,7 @@ public class DigitalBankingBackendApplication {
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService){
         return args -> {
             Stream.of("Hassan","Imane","Mohamed").forEach(name->{
-                Customer customer = new Customer();
+                CustomerDTO customer = new CustomerDTO();
                 customer.setName(name);
                 customer.setEmail(name+"@gmail.com");
                 bankAccountService.saveCustomer(customer);

@@ -1,11 +1,12 @@
 package com.med.digitalbankingbackend.web;
 
+import com.med.digitalbankingbackend.dtos.CustomerDTO;
 import com.med.digitalbankingbackend.entities.Customer;
+import com.med.digitalbankingbackend.exceptions.CustomerNotFoundException;
 import com.med.digitalbankingbackend.services.BankAccountService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +16,24 @@ import java.util.List;
 public class CustomerRestController {
     private BankAccountService bankAccountService;
     @GetMapping("/customers")
-    public List<Customer> customers(){
+    public List<CustomerDTO> customers(){
         return bankAccountService.listCustomer();
+    }
+    @GetMapping("customers/{id}")
+    public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerId) throws CustomerNotFoundException {
+        return bankAccountService.getCustomer(customerId);
+    }
+    @PostMapping("/customers")
+    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
+        return bankAccountService.saveCustomer(customerDTO);
+    }
+    @PutMapping("/customers/{customerId}") //le mement que l'attribut port le meme nom que le path variable on a pas besoin de mettre name.
+    public CustomerDTO updateCustomer(@PathVariable Long customerId,@RequestBody CustomerDTO customerDTO){
+        customerDTO.setId(customerId);
+        return bankAccountService.updateCustomer(customerDTO);
+    }
+    @DeleteMapping("/customers/{id}")
+    public void deleteCustomer(@PathVariable Long id){
+        bankAccountService.deleteCustomer(id);
     }
 }
