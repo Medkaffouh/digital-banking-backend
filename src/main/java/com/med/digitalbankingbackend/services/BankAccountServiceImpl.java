@@ -1,9 +1,6 @@
 package com.med.digitalbankingbackend.services;
 
-import com.med.digitalbankingbackend.dtos.BankAccountDTO;
-import com.med.digitalbankingbackend.dtos.CurrentBankAccountDTO;
-import com.med.digitalbankingbackend.dtos.CustomerDTO;
-import com.med.digitalbankingbackend.dtos.SavingBankAccountDTO;
+import com.med.digitalbankingbackend.dtos.*;
 import com.med.digitalbankingbackend.entities.*;
 import com.med.digitalbankingbackend.enums.OperationType;
 import com.med.digitalbankingbackend.exceptions.BalanceNotSufficientException;
@@ -168,5 +165,10 @@ public class BankAccountServiceImpl implements BankAccountService{
     @Override
     public void deleteCustomer(Long customerId){
         customerRepository.deleteById(customerId);
+    }
+    @Override
+    public List<AccountOperationDTO> accountHistory(String accountId){
+        List<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountId(accountId);
+        return accountOperations.stream().map(op->dtoMapper.fromAccountOperation(op)).collect(Collectors.toList());
     }
 }

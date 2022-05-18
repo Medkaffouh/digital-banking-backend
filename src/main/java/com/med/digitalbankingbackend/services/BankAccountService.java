@@ -1,9 +1,6 @@
 package com.med.digitalbankingbackend.services;
 
-import com.med.digitalbankingbackend.dtos.BankAccountDTO;
-import com.med.digitalbankingbackend.dtos.CurrentBankAccountDTO;
-import com.med.digitalbankingbackend.dtos.CustomerDTO;
-import com.med.digitalbankingbackend.dtos.SavingBankAccountDTO;
+import com.med.digitalbankingbackend.dtos.*;
 import com.med.digitalbankingbackend.entities.BankAccount;
 import com.med.digitalbankingbackend.entities.CurrentAccount;
 import com.med.digitalbankingbackend.entities.Customer;
@@ -31,4 +28,6 @@ public interface BankAccountService {
     CustomerDTO updateCustomer(CustomerDTO customerDTO);
 
     void deleteCustomer(Long customerId);
+
+    List<AccountOperationDTO> accountHistory(String accountId);
 }

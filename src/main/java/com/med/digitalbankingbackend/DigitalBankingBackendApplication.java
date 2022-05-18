@@ -1,6 +1,9 @@
 package com.med.digitalbankingbackend;
 
+import com.med.digitalbankingbackend.dtos.BankAccountDTO;
+import com.med.digitalbankingbackend.dtos.CurrentBankAccountDTO;
 import com.med.digitalbankingbackend.dtos.CustomerDTO;
+import com.med.digitalbankingbackend.dtos.SavingBankAccountDTO;
 import com.med.digitalbankingbackend.entities.*;
 import com.med.digitalbankingbackend.enums.AccountStatus;
 import com.med.digitalbankingbackend.enums.OperationType;
@@ -40,11 +43,17 @@ public class DigitalBankingBackendApplication {
                 try {
                     bankAccountService.saveCurrentBankAccount(Math.random()*90000,9000,customer.getId());
                     bankAccountService.saveSavingBankAccount(Math.random()*120000,5.5, customer.getId());
-                    List<BankAccount> bankAccounts = bankAccountService.bankAccountList();
-                    for (BankAccount bankAccount:bankAccounts){
+                    List<BankAccountDTO> bankAccounts = bankAccountService.bankAccountList();
+                    for (BankAccountDTO bankAccount:bankAccounts){
                         for(int i = 0; i < 10 ; i++){
-                            bankAccountService.credit(bankAccount.getId(),1000+Math.random()*120000,"Credit");
-                            bankAccountService.debit(bankAccount.getId(),1000+Math.random()*9000,"Debit");
+                            String accountId;
+                            if(bankAccount instanceof SavingBankAccountDTO){
+                                accountId = ((SavingBankAccountDTO) bankAccount).getId();
+                            }else {
+                                accountId = ((CurrentBankAccountDTO) bankAccount).getId();
+                            }
+                            bankAccountService.credit(accountId,1000+Math.random()*120000,"Credit");
+                            bankAccountService.debit(accountId,1000+Math.random()*9000,"Debit");
                         }
                     }
                 } catch (CustomerNotFoundException e) {
