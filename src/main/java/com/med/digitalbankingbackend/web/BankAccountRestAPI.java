@@ -6,15 +6,13 @@ import com.med.digitalbankingbackend.dtos.BankAccountDTO;
 import com.med.digitalbankingbackend.exceptions.BankAccountNotFoundException;
 import com.med.digitalbankingbackend.services.BankAccountService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin("http://localhost:4200/")
 public class BankAccountRestAPI {
     private BankAccountService bankAccountService;
 
