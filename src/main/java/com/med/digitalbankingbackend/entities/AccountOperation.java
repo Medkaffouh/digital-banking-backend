@@ -1,5 +1,6 @@
 package com.med.digitalbankingbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.med.digitalbankingbackend.enums.OperationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class AccountOperation {
     @Enumerated(EnumType.STRING)
     private OperationType type;
     @ManyToOne
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private BankAccount bankAccount;
     private String description;
 }

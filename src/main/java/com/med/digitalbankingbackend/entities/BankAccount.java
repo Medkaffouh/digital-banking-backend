@@ -1,5 +1,6 @@
 package com.med.digitalbankingbackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.med.digitalbankingbackend.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public abstract class BankAccount {
     @Enumerated(EnumType.STRING) //enregistrer sous form d'un string
     private AccountStatus status;
     @ManyToOne
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer customer;
     @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
     private List<AccountOperation> accountOperations;
