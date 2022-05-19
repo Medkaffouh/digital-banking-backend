@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin("http://localhost:4200/")
+@CrossOrigin("*")
 public class BankAccountRestAPI {
     private BankAccountService bankAccountService;
 

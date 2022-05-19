@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@CrossOrigin("http://localhost:4200/") //vous pouvez authoriser tout les cross origin en utilisant étoile *
+@CrossOrigin("*") //vous pouvez authoriser une domaine précise
 public class CustomerRestController {
     private BankAccountService bankAccountService;
     @GetMapping("/customers")
