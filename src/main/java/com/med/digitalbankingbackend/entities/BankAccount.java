@@ -18,10 +18,10 @@ public abstract class BankAccount {
     private String id;
     private double balance;
     private Date createAt;
-    @Enumerated(EnumType.STRING) //enregistrer sous form d'un string
+    @Enumerated(EnumType.STRING) // enregistrer sous form d'un string
     private AccountStatus status;
     @ManyToOne
-    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Customer customer;
     @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)
     private List<AccountOperation> accountOperations;
